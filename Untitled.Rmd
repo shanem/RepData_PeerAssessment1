@@ -1,0 +1,54 @@
+---
+title: "walkingActivityAnalysis"
+author: "Shane Mooney"
+date: "May 7, 2016"
+output: html_document
+---
+## Unzip and load the activity file
+```{r}
+unzip("activity.zip")
+activity <- read.csv2("activity.csv", sep=",")
+activity$steps <- as.numeric(as.character(activity$steps))
+activity$date <- as.Date(as.character(activity$date))
+activity$interval <- as.numeric(as.character(activity$interval))
+head(activity)
+```
+
+
+## What is mean total number of steps taken per day?
+
+Total steps per day:
+```{r}
+stepsByDay <- aggregate(steps ~ date, activity, sum)
+mean(stepsByDay$steps)
+```
+
+```{r}
+hist(stepsByDay$steps, ylim=range(0, 30), main="Histogram of Steps per Day")
+```
+
+Mean steps per day:
+```{r}
+mean(stepsByDay$steps)
+```
+
+Median steps per day:
+```{r}
+median(stepsByDay$steps)
+```
+
+## What is the average daily activity pattern?
+
+Average day activity:
+```{r}
+stepsByInterval <- aggregate(steps ~ interval, activity, mean)
+plot.ts(stepsByInterval$steps, xlab="Nth 5 minute interval (from midnight)", ylab = "Steps")
+```
+
+Highest average activity 5 minute period:
+```{r}
+interval <- stepsByInterval[stepsByInterval$steps == max(stepsByInterval$steps), ]$interval
+```
+The average highest activity was the 5 minute interval starting at `r interval` minutes since midnight
+
+
