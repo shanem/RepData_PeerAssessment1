@@ -1,5 +1,5 @@
 ---
-title: "walkingActivityAnalysis"
+title: "Walking Activity Analysis"
 author: "Shane Mooney"
 date: "May 7, 2016"
 output: html_document
