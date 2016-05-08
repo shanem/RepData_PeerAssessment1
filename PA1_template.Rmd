@@ -99,7 +99,7 @@ activity$kindOfDay <- as.factor(ifelse(dayOfWeek == "Saturday", "weekend", "week
 weekendActivity <- activity[activity$kindOfDay == "weekend", ]
 weekdayActivity <- activity[activity$kindOfDay == "weekday", ]
 
-par(mfrow=c(2,1), pin=c(5, 1.0))
+par(mfrow=c(2,1), pin=c(5, 1.5))
 
 weekdayStepsByInterval <- aggregate(steps ~ interval, weekdayActivity, mean)
 plot.ts(weekdayStepsByInterval$interval, weekdayStepsByInterval$steps, xy.lines=TRUE, type="n", main="Weekday", ylab = "Steps", xlab="")
